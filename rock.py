@@ -40,7 +40,7 @@ def run():
     def choice():
         global num
         Bot = [rockBot, scissorsBot, paperBot]
-        num = random.randrange(0, 2)
+        num = random.randrange(0, 3)
         gesture = Bot[num]
 
         return gesture
@@ -49,6 +49,13 @@ def run():
     def restart():
         root.destroy()
 
+    #Кнопки
+    def render_btn(x, y, text, width, height, do):
+        btn = tk.Button(root, text = text, command = do)
+        btn.configure(width = width, height = height, relief = tk.FLAT)
+        canvas.create_window(x, y, window = btn)
+        return btn
+
     #Оброботка клика
     out = []
     def result():
@@ -56,13 +63,8 @@ def run():
         canvas.create_image(100, 100, image = background)
 
         #Кнопки перезапуска и выхода
-        btnR = tk.Button(root, text = "Сыграть ещё раз", command = restart)
-        btnR.configure(width = 20, height = 2, relief = tk.FLAT)
-        canvas.create_window(140, 500, window = btnR)
-
-        btnE = tk.Button(root, text = "Выход", command = exit)
-        btnE.configure(width = 20, height = 2, relief = tk.FLAT)
-        canvas.create_window(420, 500, window = btnE)
+        btnR = render_btn(140, 500, "Сыграть ещё раз", 20, 2, restart)
+        btnE = render_btn(420, 500, "Выход", 20, 2, exit)
 
         #Выбор врага
         choiceBot = choice()
@@ -84,19 +86,11 @@ def run():
         elif (((out[-1] == "0") and (num == 1)) or ((out[-1] == "1") and (num == 2)) or ((out[-1] == "2") and (num == 0))):
             canvas.create_text(290, 50, text = "Выйгрыш = )", font = "TimesNewRoman 30", fill = "orange")
 
-
-    #Кнопки
-    def render_btn(x, y, text, width, height):
-        btn = tk.Button(root, text = text, command = result)
-        btn.configure(width = width, height = height, relief = tk.FLAT)
-        canvas.create_window(x, y, window = btn)
-        return btn
-
-    btnr = render_btn(430, 200, "Камень", 20, 5)
+    btnr = render_btn(430, 200, "Камень", 20, 5, result)
     btnr.bind('<Button-1>', lambda x: out.append("0"))
-    btns = render_btn(430, 350, "Ножницы", 20, 5)
+    btns = render_btn(430, 350, "Ножницы", 20, 5, result)
     btns.bind('<Button-1>', lambda x: out.append("1"))
-    btnp = render_btn(430, 500, "Бумага", 20, 5)
+    btnp = render_btn(430, 500, "Бумага", 20, 5, result)
     btnp.bind('<Button-1>', lambda x: out.append("2"))
 
     #выход из игры
