@@ -64,7 +64,7 @@ def run():
 
         #Кнопки перезапуска и выхода
         btnR = render_btn(140, 500, "Сыграть ещё раз", 20, 2, restart)
-        btnE = render_btn(420, 500, "Выход", 20, 2, exit)
+        btnE = render_btn(420, 500, "Выход", 20, 2, quit)
 
         #Выбор врага
         choiceBot = choice()
