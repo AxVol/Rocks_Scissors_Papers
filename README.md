@@ -4,6 +4,6 @@
 
 *****************
 Инструменты:
-Python 3.9
-pyperclip;
-yadisk
+Python 3.9;
+tkinter;
+PIL
